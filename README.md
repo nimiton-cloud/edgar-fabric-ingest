@@ -2,6 +2,21 @@
 
 A CLI to fetch SEC EDGAR filings and emit CMD+RVL Fabric command JSON.
 
+## What this is
+
+A reference implementation that converts SEC EDGAR filings into provenance-first, CQRS-style fabric events. The output is facts/events, not interpretations.
+
+## What this is not
+
+- Forecasting or prediction
+- Sentiment analysis
+- A graph builder
+- Trading or investment advice
+
+## Relationship to CMD+RVL
+
+Maintained by the CMD+RVL team. This tool reflects CMD+RVL data fabric principles: append-only ingest, provenance, strict ingest schema, and replayable projections. This repo is standalone; the CMD+RVL ingestion endpoint is optional. The CMD+RVL fabric ingest endpoint is available by request while in limited beta/stealth (no public URL).
+
 ## Requirements
 
 - **Node.js 18** or later
@@ -55,6 +70,20 @@ node dist/cli.js \
   --before 2023-12-31 \
   --forms 10-K,10-Q \
   --out json
+```
+
+Run without installing globally using npx:
+
+```bash
+npx edgar-fabric-ingest \
+  --issuer MSFT \
+  --after 2023-01-01 \
+  --before 2023-12-31 \
+  --forms 10-K,10-Q \
+  --out json \
+  --post https://example.com/ingest \
+  --dry-run \
+  --verbose
 ```
 
 Post commands to an endpoint:
@@ -131,6 +160,21 @@ node dist/cli.js --issuer MSFT --after 2023-01-01 --before 2023-12-31 --forms 10
 ```
 
 ---
+
+## Design principles
+
+- Deterministic
+- Schema-first
+- Provenance-aware
+- Composable projections (edges inferred later)
+
+## Contact / Access
+
+For access requests or questions, open an issue. More info at cmdrvl.com.
+
+## License
+
+See LICENSE.
 
 ## Appendix: Installing Node.js via nvm
 
