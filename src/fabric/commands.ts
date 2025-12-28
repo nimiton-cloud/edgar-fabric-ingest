@@ -59,6 +59,19 @@ export const buildCompanyCommand = (
   };
 };
 
+export const buildDataCommand = (
+  payload: PayloadItem[],
+  verbose?: boolean
+): Command => {
+  return {
+    Command: "AddData",
+    Payload: payload.map((item) => ({
+      ...item,
+      Metrics: filterMetrics(item.Metrics ?? [], FilingMetricAllowlist, verbose)
+    }))
+  };
+};
+
 export const buildFilingCommand = (
   payload: PayloadItem[],
   verbose?: boolean

@@ -1,8 +1,9 @@
 export const CompanyMetricAllowlist = new Set(["CIK", "Ticker", "LEI"]);
 export const FilingMetricAllowlist = new Set([
   "FormType",
-  "AccessionNumber",
+  "CIK",
   "FilingDate",
+  "AccessionNumber",
   "DocumentUrl"
 ]);
 export const BondMetricAllowlist = new Set([

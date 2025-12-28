@@ -114,7 +114,16 @@ node dist/cli.js \
 
 ## Output
 
-### JSON (default)
+### EDGAR Filing Lineage Convention
+
+Original EDGAR filings are emitted as `AddData` commands with:
+
+- `Source = "sec"`
+- `Channel = "edgar"`
+- `SourceDetail = "https://www.sec.gov/Archives/edgar/data/{cikNoLeadingZeros}/{accessionNoDashes}/{primaryDocument}"`
+- `ChannelDetail = "{FormType}/{AccessionNumber}"`
+
+Sample JSON payload (document URL shortened):
 
 ```json
 [
@@ -134,17 +143,20 @@ node dist/cli.js \
     ]
   },
   {
-    "Command": "AddFiling",
+    "Command": "AddData",
     "Payload": [
       {
         "Id": "0000789019-23-000123",
-        "Name": "10-K 2023-08-03",
+        "Name": "Microsoft Corp 10-K 2023",
         "Source": "sec",
+        "SourceDetail": "https://www.sec.gov/Archives/edgar/data/789019/000078901923000123/...",
         "Channel": "edgar",
+        "ChannelDetail": "10-K/0000789019-23-000123",
         "Metrics": [
           { "key": "FormType", "value": "10-K", "asOf": "2023-08-03" },
-          { "key": "AccessionNumber", "value": "0000789019-23-000123", "asOf": "2023-08-03" },
+          { "key": "CIK", "value": "789019", "asOf": "2023-08-03" },
           { "key": "FilingDate", "value": "2023-08-03", "asOf": "2023-08-03" },
+          { "key": "AccessionNumber", "value": "0000789019-23-000123", "asOf": "2023-08-03" },
           { "key": "DocumentUrl", "value": "https://www.sec.gov/Archives/edgar/data/789019/000078901923000123/doc.htm", "asOf": "2023-08-03" }
         ]
       }

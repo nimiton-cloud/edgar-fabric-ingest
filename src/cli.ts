@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-import { buildCompanyCommand, buildFilingCommand, Command } from "./fabric/commands";
+import { buildCompanyCommand, buildDataCommand, Command } from "./fabric/commands";
+import { buildEdgarFilingPayload } from "./fabric/edgar";
 import { fetchSubmissions } from "./sec/client";
 import { extractFilings } from "./sec/filings";
 import { resolveIssuer } from "./sec/issuer";
 import { postJson } from "./util/http";
-import { buildDocumentUrl, normalizeCik, normalizeAccession } from "./util/normalize";
+import { normalizeCik } from "./util/normalize";
 
 const DEFAULT_USER_AGENT =
   "cmdrvl-edgar-fabric-ingest (contact: contact@example.com)";
@@ -129,43 +130,12 @@ const buildCommands = async (options: CliOptions): Promise<Command[]> => {
     options.verbose
   );
 
-  const filingPayload = filings.map((filing) => {
-    const accessionNumber = normalizeAccession(filing.accessionNumber);
-    return {
-      Id: accessionNumber,
-      Name: `${filing.form} ${filing.filingDate}`,
-      Source: "sec",
-      Channel: "edgar",
-      Metrics: [
-        {
-          key: "FormType",
-          value: filing.form,
-          asOf: filing.filingDate
-        },
-        {
-          key: "AccessionNumber",
-          value: accessionNumber,
-          asOf: filing.filingDate
-        },
-        {
-          key: "FilingDate",
-          value: filing.filingDate,
-          asOf: filing.filingDate
-        },
-        {
-          key: "DocumentUrl",
-          value: buildDocumentUrl(
-            normalizedCik,
-            accessionNumber,
-            filing.primaryDocument
-          ),
-          asOf: filing.filingDate
-        }
-      ]
-    };
+  const filingPayload = buildEdgarFilingPayload(filings, {
+    issuerName,
+    cik: normalizedCik
   });
 
-  const filingCommand = buildFilingCommand(filingPayload, options.verbose);
+  const filingCommand = buildDataCommand(filingPayload, options.verbose);
   return [companyCommand, filingCommand];
 };
 
